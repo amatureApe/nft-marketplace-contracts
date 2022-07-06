@@ -9,7 +9,7 @@ const { developmentChains } = require("../../helper-hardhat-config");
     const PRICE = ethers.utils.parseEther("0.1");
     const TOKEN_ID = 0;
 
-    beforeEach(async => {
+    beforeEach(async () => {
       accounts = await ethers.getSigners();
       deployer = accounts[0];
       user = accounts[1];
@@ -22,7 +22,7 @@ const { developmentChains } = require("../../helper-hardhat-config");
       await basicNft.approve(nftMarketplaceContract.address, TOKEN_ID);
     });
 
-    describe("listItem", function {
+    describe("listItem", function () {
       it("emits an event after listing an item", async function () {
         expect(await nftMarketplace.listItem(basicNft.address, TOKEN_ID, PRICE)).to.emit(
           "ItemListed"
@@ -139,8 +139,8 @@ const { developmentChains } = require("../../helper-hardhat-config");
 
         assert(
           deployerBalanceAfter.add(gasCost).toString() ==
-          deployerProceedsBefore.add(deployerBalanceBefore).toString();
+          deployerProceedsBefore.add(deployerBalanceBefore).toString()
         );
+      });
     });
-  });
   });

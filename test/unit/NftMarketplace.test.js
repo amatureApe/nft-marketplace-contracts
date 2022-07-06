@@ -36,18 +36,11 @@ const { developmentChains } = require("../../helper-hardhat-config");
         ).to.be.revertedWith(error)
       });
       it("exclusively allows owners to list", async function () {
-        nftMarketplace = nftMarketplaceContract.connect(user);
-        await basicNft.approve(user.address, TOKEN_ID);
+        nftMarketplace = nftMarketplaceContract.connect(user)
+        await basicNft.approve(user.address, TOKEN_ID)
         await expect(
-          nftMarketplace.listItem(basicNft.address, TOKEN_ID, PRICE).to.be.revertedWith("NotOwner")
-        );
-      });
-      it("needs approvals to list item", async function () {
-        await basicNft.approve(ethers.constants.AddressZero, TOKEN_ID);
-        await expect(
-          nftMarketplace.listItem(basicNft.address, TOKEN_ID, PRICE).to.be.revertedWith("NotApprovedForMarketplace")
-        )
-
+          nftMarketplace.listItem(basicNft.address, TOKEN_ID, PRICE)
+        ).to.be.revertedWith("NotOwner")
       });
       it("updates listing with seller and price", async function () {
         await nftMarketplace.listItem(basicNft.address, TOKEN_ID, PRICE);
@@ -95,12 +88,11 @@ const { developmentChains } = require("../../helper-hardhat-config");
         await nftMarketplace.listItem(basicNft.address, TOKEN_ID, PRICE);
         nftMarketplace = nftMarketplaceContract.connect(user);
         expect(
-          await nftMarketplace.buyItem(basicNft.address, TOKEN_ID, { value: PRICE }).to.emit("ItemBought")
-        );
+          await nftMarketplace.buyItem(basicNft.address, TOKEN_ID, { value: PRICE })).to.emit("ItemBought");
         const newOwner = await basicNft.ownerOf(TOKEN_ID);
         const deployerProceeds = await nftMarketplace.getProceeds(deployer.address);
         assert(newOwner.toString() == user.address);
-        assert(deployetProceeds.toString() == PRICE.toString());
+        assert(deployerProceeds.toString() == PRICE.toString());
       });
     });
     describe("updateListing", function () {

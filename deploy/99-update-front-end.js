@@ -1,7 +1,7 @@
 const { ethers, network } = require("hardhat");
 const fs = require("fs");
 
-const frontEndContractsFile = "../nft-marketplace/constants/networkMapping.json";
+const frontEndContractsFile = "../nft-marketplace-frontend/constants/networkMapping.json";
 
 module.exports = async function () {
   if (process.env.UPDATE_FRONT_END) {

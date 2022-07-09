@@ -8,6 +8,7 @@ require("dotenv").config();
 
 
 const RINKEBY_RPC_URL = process.env.RINKEBY_RPC_URL;
+const GOERLI_RPC_URL = process.env.GOERLI_RPC_URL;
 const PRIVATE_KEY = process.env.MNEMONIC;
 const COINMARKETCAP_API_KEY = process.env.COINMARKETCAP_API_KEY;
 const ETHERSCAN_API_KEY = process.env.ETHERSCAN_API_KEY;
@@ -23,7 +24,15 @@ module.exports = {
       chainId: 4,
       blockConfirmations: 6,
       url: RINKEBY_RPC_URL,
-      accounts: [PRIVATE_KEY]
+      accounts: [PRIVATE_KEY],
+      saveDeployments: true,
+    },
+    goerli: {
+      chainId: 5,
+      blockConfirmations: 6,
+      url: GOERLI_RPC_URL,
+      accounts: [PRIVATE_KEY],
+      saveDeployments: true,
     }
   },
   gasReporter: {
@@ -39,6 +48,12 @@ module.exports = {
     },
     player: {
       default: 1
+    },
+  },
+  etherscan: {
+    apiKey: {
+      mainnet: `${process.env.ETHERSCAN_API_KEY}`,
+      goerli: `${process.env.ETHERSCAN_API_KEY}`,
     },
   },
   mocha: {

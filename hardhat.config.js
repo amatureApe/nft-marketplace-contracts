@@ -54,6 +54,7 @@ module.exports = {
     apiKey: {
       mainnet: `${process.env.ETHERSCAN_API_KEY}`,
       goerli: `${process.env.ETHERSCAN_API_KEY}`,
+      rinkeby: `${process.env.ETHERSCAN_API_KEY}`,
     },
   },
   mocha: {
